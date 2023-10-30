@@ -1,0 +1,19 @@
+.nav-menu{
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    background-color: rgba(0,0,0,0.5);
+    margin: 0;
+    min-height: 60px;
+}
+.nav-menu li {
+    padding: 10px;
+}
+.nav-menu li a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform:uppercase;
+}
