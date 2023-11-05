@@ -1,13 +1,22 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const authRouter = require("./authentication.js");
 const app = express();
 
+//Configuring view enging ejs
 app.set("view engine", "ejs");
+
+//using expressLayouts middleware
 app.use(expressLayouts);
-//setting custom layout folder
+
+//Configuring custom layout folder
 app.set("layout", "layouts/layout");
 
+//Using static resources like style.css
 app.use(express.static("views"));
+
+//Authentication middleware
+app.use(authRouter);
 
 app.get("/", (req, res)=>{
     const locals = {
