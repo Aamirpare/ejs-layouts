@@ -15,6 +15,11 @@ app.set("layout", "layouts/layout");
 //Using static resources like style.css
 app.use(express.static("views"));
 
+//to read req.body, add the following middleware because node doesn't read it bydefault.
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+
 //Authentication middleware
 app.use(authRouter);
 
