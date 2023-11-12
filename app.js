@@ -21,6 +21,7 @@ app.use(express.static("views"));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+app.use(publicRouter);
 
 //Authentication middleware
 //The middleware order is very important, placing authRouter middleware 
@@ -28,7 +29,12 @@ app.use(express.urlencoded({extended: true}));
 //no authtication will be applied for the routes above the authRouter.
 app.use(authRouter);
 
-app.use(publicRouter);
+//To apply a specific layout to the view/page
+app.get("/admin", (req, res)=>{
+    //evaluate view uses the adminLayout. 
+    //layout:false can be used in case layout is not required. 
+    res.render("evaluate", {layout: 'layouts/adminLayout'});
+});
 
 app.listen(PORT, ()=>{
     console.log("Server is listening on port: 3000");
