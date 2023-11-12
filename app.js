@@ -1,7 +1,9 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
-const authRouter = require("./authentication.js");
+const authRouter = require("./routes/authenticationRouter.js");
+const publicRouter = require("./routes/publicUserRouter.js");
 const app = express();
+const PORT = 3000;
 
 //Configuring view enging ejs
 app.set("view engine", "ejs");
@@ -21,25 +23,13 @@ app.use(express.urlencoded({extended: true}));
 
 
 //Authentication middleware
+//The middleware order is very important, placing authRouter middleware 
+//down the routes in app.js will bybass all the routes above it, means 
+//no authtication will be applied for the routes above the authRouter.
 app.use(authRouter);
 
-app.get("/", (req, res)=>{
-    const locals = {
-        title : "Page Title",
-        description : "Page Description",
-        header : "Page Header"
-    }
-    res.render("index", locals);
-});
+app.use(publicRouter);
 
-app.get("/services", (req, res)=>{
-    res.render("services");
-});
-
-app.get("/about", (req, res)=>{
-    res.render("about");
-});
-
-app.listen(3000, ()=>{
+app.listen(PORT, ()=>{
     console.log("Server is listening on port: 3000");
 });
