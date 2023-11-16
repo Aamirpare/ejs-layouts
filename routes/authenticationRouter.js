@@ -35,6 +35,10 @@ authRouter.post("/signin", (req, res)=>{
     }
 });
 
+authRouter.get("/signout", (req, res)=>{
+    isAuthenticated = false;
+    res.redirect("/");
+});
 
 //This middleware authenticates each request except the above signin get request. 
 //It redirects to the signin view if the
@@ -51,4 +55,5 @@ authRouter.use((req, res, next)=>{
     }
 });
 
-module.exports = authRouter;
+getAuthenticationState = () => isAuthenticated;
+module.exports = {authRouter, getAuthenticationState};

@@ -4,5 +4,10 @@
         <li><a href="/Services">Services</a></li>
         <li><a href="/Admin">Evaluation</a></li>
         <li><a href="/About">About</a></li>
+        <% if(getAuthState()){ %>
+            <li><a href="/signout">Logout</a></li>
+        <%}else{%>
+            <li><a href="/signin">Login</a></li>
+        <%}%>
     </ul>
 </nav>
